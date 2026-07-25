@@ -14,6 +14,7 @@
 - 🌤️ **Weather Integration** — Real-time weather data via Open-Meteo (free, no API key)
 - 🌙 **Dark/Light Theme** — Easy on the eyes, day or night
 - 💻 **Cross-Platform** — Works on macOS, Windows, Linux, and web browsers
+- 🎤 **Voice Assistant** — Talk to Google Assistant or Alexa to check your trip plans hands-free
 
 ## AI Providers (All Free!)
 
@@ -82,6 +83,21 @@ npm run ios:prepare
 # Then open in Xcode
 ```
 
+## Voice Assistant
+
+Talk to your trip planner hands-free via **Google Assistant** or **Amazon Alexa**.
+
+| Intent | Example | Returns |
+|--------|---------|---------|
+| GetItinerary | "What's my itinerary for day 2?" | Day-by-day spoken plan |
+| GetBudget | "What's my budget for Tokyo?" | Budget overview + tips |
+| GetPackingList | "What should I pack for Paris?" | Packing essentials |
+| GetRecommendations | "Find restaurants near me" | Top recommendations |
+| AskTrip | "Is it safe to travel to Thailand?" | AI travel advice |
+| GetWeather | "What's the weather at my destination?" | Weather forecast |
+
+**Setup**: Navigate to `Settings → Voice Setup` in the app for step-by-step deployment instructions.
+
 ## Project Structure
 
 ```
@@ -92,10 +108,11 @@ ai-trip-planner/
 ├── server/              # Express backend
 │   ├── ai/providers.js  # 7 AI provider adapters
 │   ├── ai/fallback.js   # Auto-fallback orchestrator
+│   ├── voice/           # Voice assistant adapters
 │   └── routes/          # API endpoints
 ├── src/                 # React frontend
-│   ├── pages/           # 7 pages (Home, TripForm, Itinerary, etc.)
-│   ├── components/      # UI components
+│   ├── pages/           # 8 pages (Home, TripForm, Itinerary, Voice, etc.)
+│   ├── components/      # UI components (includes voice input)
 │   ├── contexts/        # React Context (Settings, Trips)
 │   ├── hooks/           # Custom hooks (useAI, useLocalStorage)
 │   └── lib/             # Utilities, prompts, API client

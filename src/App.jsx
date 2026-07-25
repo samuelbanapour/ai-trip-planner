@@ -10,6 +10,7 @@ import Budget from './pages/Budget';
 import PackingList from './pages/PackingList';
 import Recommendations from './pages/Recommendations';
 import Settings from './pages/Settings';
+import VoiceSetup from './pages/VoiceSetup';
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
               <Route path="trip/:id/packing" element={<PackingList />} />
               <Route path="trip/:id/recommendations" element={<Recommendations />} />
               <Route path="settings" element={<Settings />} />
+              <Route path="voice" element={<VoiceSetup />} />
             </Route>
           </Routes>
         </BrowserRouter>

@@ -37,6 +37,13 @@ export default function Sidebar({ open, onToggle }) {
             <span className="link-icon">➕</span>
             New Trip
           </Link>
+          <Link
+            to="/voice"
+            className={`sidebar-link ${isActive('/voice') ? 'active' : ''}`}
+          >
+            <span className="link-icon">🎤</span>
+            Voice Setup
+          </Link>
         </div>
 
         {tripId && (

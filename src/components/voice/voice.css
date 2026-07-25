@@ -1,0 +1,171 @@
+/* ─── Voice Mic Button ─── */
+.voice-mic-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-tertiary);
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.voice-mic-btn:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
+
+.voice-mic-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.voice-mic-icon {
+  font-size: 18px;
+  z-index: 1;
+  line-height: 1;
+}
+
+.voice-mic-listening {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: var(--error);
+}
+
+.voice-mic-listening .voice-mic-icon {
+  animation: mic-bounce 0.8s ease-in-out infinite;
+}
+
+.voice-mic-unsupported {
+  opacity: 0.3;
+}
+
+/* ─── Pulse Ring ─── */
+.voice-pulse-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid var(--error);
+  animation: voice-pulse 1.2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes voice-pulse {
+  0% {
+    opacity: 1;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes mic-bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* ─── Voice Query Bar ─── */
+.voice-query-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  padding: 16px 32px;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.3);
+  animation: voice-bar-slide-up 0.25s ease-out;
+}
+
+@keyframes voice-bar-slide-up {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.voice-query-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ─── Transcript Badge ─── */
+.voice-transcript-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--accent-light);
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--accent);
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+/* ─── Input Row ─── */
+.voice-input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.voice-text-input {
+  flex: 1;
+  padding: 10px 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-family: var(--font-sans);
+  transition: border-color 0.15s;
+}
+
+.voice-text-input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.voice-text-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ─── Response Area ─── */
+.voice-response {
+  margin-top: 12px;
+  padding: 14px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  max-height: 200px;
+  overflow-y: auto;
+  animation: voice-fade-in 0.2s ease-out;
+}
+
+@keyframes voice-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.voice-loading {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.voice-error {
+  color: var(--error);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .voice-query-bar {
+    padding: 12px 16px;
+  }
+}

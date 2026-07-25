@@ -6,6 +6,7 @@ const path = require('path');
 const aiRoutes = require('./routes/ai');
 const tripRoutes = require('./routes/trips');
 const weatherRoutes = require('./routes/weather');
+const voiceRoutes = require('./routes/voice');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -25,6 +26,7 @@ app.use((_req, res, next) => {
 app.use('/api/ai', aiRoutes);
 app.use('/api/trips', tripRoutes);
 app.use('/api/weather', weatherRoutes);
+app.use('/api/voice', voiceRoutes);
 
 // Health check
 app.get('/api/health', (_req, res) => res.json({ ok: true }));

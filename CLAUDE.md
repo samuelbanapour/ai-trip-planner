@@ -21,17 +21,26 @@ ai-trip-planner/
 │   ├── ai/
 │   │   ├── providers.js # Provider registry (7 providers)
 │   │   └── fallback.js  # Fallback orchestrator with retry
+│   ├── voice/
+│   │   ├── dialogflow.js    # Google Assistant adapter
+│   │   ├── alexa.js         # Amazon Alexa adapter
+│   │   ├── intentRouter.js  # Intent normalization + AI dispatch
+│   │   └── voicePrompts.js  # Voice-optimized prompt templates
 │   └── routes/
 │       ├── ai.js        # POST /api/ai/chat (SSE streaming)
 │       ├── trips.js     # CRUD for saved trips
-│       └── weather.js   # Open-Meteo weather proxy
+│       ├── weather.js   # Open-Meteo weather proxy
+│       └── voice.js     # POST /api/voice (Dialogflow/Alexa webhook)
 ├── src/
 │   ├── App.jsx          # Root with React Router
 │   ├── index.css        # Global styles + design tokens
 │   ├── contexts/        # SettingsContext, TripContext
 │   ├── hooks/           # useAI, useLocalStorage
-│   ├── pages/           # Home, TripForm, Itinerary, Budget, PackingList, Recommendations, Settings
-│   ├── components/      # layout/, shared/, itinerary/, budget/, packing/, recommendations/
+│   ├── pages/           # Home, TripForm, Itinerary, Budget, PackingList, Recommendations, Settings, VoiceSetup
+│   ├── components/
+│   │   ├── layout/      # Sidebar, Header, Layout
+│   │   ├── voice/       # VoiceInput, VoiceQueryBar, voice.css
+│   │   └── ...          # itinerary/, budget/, packing/, recommendations/
 │   └── lib/             # api.js, helpers.js, prompts.js
 └── build/               # Electron build resources (icons, afterSign.js)
 ```
@@ -53,6 +62,8 @@ ai-trip-planner/
 - **Store**: JSON files in Electron's userData directory (store.js)
 - **IPC**: contextBridge exposes `window.tripPlannerAPI` for Electron
 - **Prompts**: All AI prompts are in `src/lib/prompts.js`, return structured JSON
+- **Voice**: Server uses CommonJS. Voice adapters detect Dialogflow vs Alexa, normalize intents, route to AI via `complete()` with `maxTokens: 300` for short spoken responses
+- **Voice UI**: Web Speech API (`webkitSpeechRecognition`) for in-app mic input. Browser support: Chrome/Edge/Safari. Graceful fallback when unsupported.
 
 ## Commands
 - `npm run dev` — Vite dev server + Electron

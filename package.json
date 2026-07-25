@@ -1,0 +1,136 @@
+{
+  "name": "ai-trip-planner",
+  "productName": "AI Trip Planner",
+  "version": "1.0.0",
+  "description": "AI-powered trip planner with 7 free AI providers. Generate itineraries, budgets, packing lists, and recommendations.",
+  "main": "main.js",
+  "author": "Solo Apps Studio <soloappsstudio26@gmail.com>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "concurrently \"vite\" \"sleep 2 && electron .\"",
+    "build": "vite build",
+    "start": "vite build && electron .",
+    "electron": "electron .",
+    "dist:mac": "npm run build && electron-builder --mac --universal --x64 --arm64",
+    "dist:win": "npm run build && electron-builder --win --x64 --arm64",
+    "dist:linux": "npm run build && electron-builder --linux AppImage --x64 --arm64",
+    "dist:all": "npm run dist:mac && npm run dist:win && npm run dist:linux",
+    "android:prepare": "mkdir -p www && cp -r dist/* www/ && npx cap sync android",
+    "android:debug": "npm run android:prepare && cd android && ./gradlew assembleDebug",
+    "android:release": "npm run android:prepare && cd android && ./gradlew assembleRelease",
+    "ios:prepare": "mkdir -p www && cp -r dist/* www/ && npx cap sync ios"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^8.4.2",
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^8.4.2",
+    "@capacitor/core": "^8.4.2",
+    "@capacitor/ios": "^8.4.2",
+    "@vitejs/plugin-react": "^4.7.0",
+    "concurrently": "^9.1.0",
+    "electron": "^31.7.7",
+    "electron-builder": "^25.1.8",
+    "vite": "^6.4.3"
+  },
+  "build": {
+    "appId": "com.soloappsstudio.aitripplanner",
+    "productName": "AI Trip Planner",
+    "copyright": "Copyright © 2026 Solo Apps Studio",
+    "publish": null,
+    "afterSign": "build/afterSign.js",
+    "directories": {
+      "output": "dist-electron",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "store.js",
+      "server/**/*",
+      "dist/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.travel",
+      "icon": "build/icon.icns",
+      "identity": null,
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "universal",
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "universal",
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "gatekeeperAssess": false
+    },
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "linux": {
+      "icon": "build/icon.png",
+      "category": "Travel",
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    }
+  },
+  "keywords": [
+    "trip",
+    "planner",
+    "travel",
+    "ai",
+    "itinerary"
+  ],
+  "type": "commonjs"
+}

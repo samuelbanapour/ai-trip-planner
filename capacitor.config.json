@@ -1,0 +1,8 @@
+{
+  "appId": "com.soloappsstudio.aitripplanner",
+  "appName": "AI Trip Planner",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false
+  }
+}
